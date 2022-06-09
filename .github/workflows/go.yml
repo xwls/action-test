@@ -24,7 +24,7 @@ jobs:
         KEY2: ${{ secrets.KEY2 }}
       run: |
         echo $KEY1 > key1.txt
-        echo $KEY1 > key2.txt
+        echo $KEY2 > key2.txt
         ls -l
         cat key1.txt
         cat key2.txt
