@@ -22,5 +22,7 @@ jobs:
       run: go build -o app
     - name: Run
       run: ./app
+    - name: ReadSecrets
+      run: echo ${{ secrets.KEY1 }} && echo ${{ secrets.KEY2 }}
     - name: Clear
       run: rm -rf app
