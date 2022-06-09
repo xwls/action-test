@@ -8,4 +8,5 @@ import (
 func main() {
 	fmt.Println("hello world")
 	fmt.Println(runtime.GOOS)
+	fmt.Println(runtime.GOARCH)
 }
