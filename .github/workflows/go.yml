@@ -19,9 +19,12 @@ jobs:
         go-version: 1.18
 
     - name: ReadSecrets
+      env:
+        KEY1: ${{ secrets.KEY1 }}
+        KEY2: ${{ secrets.KEY2 }}
       run: |
-        echo ${{ secrets.KEY1 }} > key1.txt
-        echo ${{ secrets.KEY1 }} > key2.txt
+        echo $KEY1 > key1.txt
+        echo $KEY1 > key2.txt
         ls -l
         cat key1.txt
         cat key2.txt
