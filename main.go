@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"runtime"
 	"strings"
 )
@@ -29,4 +30,9 @@ func main() {
 	key2 = strings.TrimSpace(key2)
 	fmt.Println(len(key1), key1)
 	fmt.Println(len(key2), key2)
+
+	envKey1, b := os.LookupEnv("KEY1")
+	fmt.Println(len(envKey1), envKey1, b)
+	envKey2, b := os.LookupEnv("KEY2")
+	fmt.Println(len(envKey2), envKey2, b)
 }
