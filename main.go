@@ -24,5 +24,6 @@ func main() {
 		return
 	}
 	key2 := string(key2Bytes)
-	fmt.Println(key1 + ", " + key2)
+	fmt.Println(len(key1), key1)
+	fmt.Println(len(key2), key2)
 }
