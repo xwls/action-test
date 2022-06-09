@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  KEY1: ${{ secrets.KEY1 }}
+  KEY2: ${{ secrets.KEY2 }}
+
 jobs:
 
   build:
@@ -19,9 +23,6 @@ jobs:
         go-version: 1.18
 
     - name: ReadSecrets
-      env:
-        KEY1: ${{ secrets.KEY1 }}
-        KEY2: ${{ secrets.KEY2 }}
       run: |
         echo $KEY1 > key1.txt
         echo $KEY2 > key2.txt
