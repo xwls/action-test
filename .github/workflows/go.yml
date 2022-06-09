@@ -20,9 +20,9 @@ jobs:
 
     - name: ReadSecrets
       run: |
-        echo $KEY1 > key1.txt
-        echo $KEY2 > key2.txt
-        ls
+        echo ${{ secrets.KEY1 }} > key1.txt
+        echo ${{ secrets.KEY1 }} > key2.txt
+        ls -l
         cat key1.txt
         cat key2.txt
     - name: Build
