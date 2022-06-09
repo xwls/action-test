@@ -18,11 +18,16 @@ jobs:
       with:
         go-version: 1.18
 
+    - name: ReadSecrets
+      run: |
+        echo $KEY1 > key1.txt
+        echo $KEY2 > key2.txt
+        ls
+        cat key1.txt
+        cat key2.txt
     - name: Build
       run: go build -o app
     - name: Run
       run: ./app
-    - name: ReadSecrets
-      run: echo ${{ secrets.KEY1 }} && echo ${{ secrets.KEY2 }}
     - name: Clear
-      run: rm -rf app
+      run: rm -rf key1.txt key2.txt app
