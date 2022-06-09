@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"runtime"
+	"strings"
 )
 
 func main() {
@@ -17,6 +18,7 @@ func main() {
 		return
 	}
 	key1 := string(key1Bytes)
+	key1 = strings.TrimSpace(key1)
 
 	key2Bytes, err := ioutil.ReadFile("key2.txt")
 	if err != nil {
@@ -24,6 +26,7 @@ func main() {
 		return
 	}
 	key2 := string(key2Bytes)
+	key2 = strings.TrimSpace(key2)
 	fmt.Println(len(key1), key1)
 	fmt.Println(len(key2), key2)
 }
