@@ -7,6 +7,10 @@ on:
     branches: [ "master" ]
   workflow_dispatch:
 
+env:
+  CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+
 jobs:
 
   build:
@@ -27,6 +31,7 @@ jobs:
         rm -rf app.log
         ./app
         echo `date +"%Y-%m-%d %H:%M:%S"` > time.log
+        cat app.log
     - name: Clear
       run: rm -rf app
     - name: Commit #上传新的refresh_token到仓库

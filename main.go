@@ -55,10 +55,26 @@ func init() {
 	viper.AddConfigPath("./conf")
 	err = viper.ReadInConfig()
 	if err != nil {
-		logrus.WithField("err", err.Error()).Error("load config failed")
+		logger.WithField("err", err.Error()).Error("load config failed")
 		panic(err)
 	}
 	apis = viper.GetStringSlice("apis")
+	//从环境变量读取 CLIENT_ID 和 CLIENT_SECRET
+	clientId, _ := os.LookupEnv("CLIENT_ID")
+	if clientId == "" {
+		logger.Error("clientId can not be empty")
+		panic(err)
+	}
+	clientSecret, _ := os.LookupEnv("CLIENT_SECRET")
+	if clientSecret == "" {
+		logger.Error("clientSecret can not be empty")
+		panic(err)
+	}
+	msOauthConfig.ClientID = clientId
+	msOauthConfig.ClientSecret = clientSecret
+
+	msOauthConfig.Scopes = viper.GetStringSlice("scope")
+	msOauthConfig.RedirectURL = viper.GetString("redirect_uri")
 }
 
 func main() {
