@@ -5,11 +5,8 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
-env:
-  KEY1: ${{ secrets.KEY1 }}
-  KEY2: ${{ secrets.KEY2 }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  schedule:
+    - cron: "0/3 * * * *"
 
 jobs:
 
@@ -28,7 +25,7 @@ jobs:
       run: go build -o app
     - name: Run
       run: |
-        ./app
+        ./app > app.log
         echo `date +"%Y-%m-%d %H:%M:%S"` > time.log
     - name: Clear
       run: rm -rf app
