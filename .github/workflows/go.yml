@@ -22,12 +22,14 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: 1.18
+    - name: Go Download
+      run: go mod download
     - name: Build
       run: go build -o app
     - name: Run
       run: |
         ./app
-        echo `date +"%Y-%m-%d %H:%M:%S"` begin > time.log
+        echo `date +"%Y-%m-%d %H:%M:%S"` > time.log
     - name: Clear
       run: rm -rf app
     - name: Commit #上传新的refresh_token到仓库
@@ -35,7 +37,7 @@ jobs:
         git config --global user.email robot@githubaction.com
         git config --global user.name robot
         git add .
-        git commit -m "save time log" -a
+        git commit -m "save by robot" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
