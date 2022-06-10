@@ -79,13 +79,10 @@ func init() {
 
 func main() {
 	rand.Seed(time.Now().Unix())
-	for i := 0; i < 3; i++ {
-		//随机取一个url
-		url := apis[rand.Intn(len(apis))]
-		//访问
-		accessAPI(url)
-		time.Sleep(time.Second)
-	}
+	//随机取一个url
+	url := apis[rand.Intn(len(apis))]
+	//访问
+	accessAPI(url)
 }
 
 // accessAPI 访问API
