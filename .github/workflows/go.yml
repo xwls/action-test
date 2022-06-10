@@ -25,7 +25,8 @@ jobs:
       run: go build -o app
     - name: Run
       run: |
-        ./app > app.log
+        rm -rf app.log
+        ./app
         echo `date +"%Y-%m-%d %H:%M:%S"` > time.log
     - name: Clear
       run: rm -rf app

@@ -9,6 +9,7 @@ import (
 	"io"
 	"io/ioutil"
 	"math/rand"
+	"os"
 	"time"
 )
 
@@ -30,8 +31,17 @@ var msOauthConfig = &oauth2.Config{
 	Endpoint: endpoint,
 }
 
+var logger *logrus.Logger
+
 func init() {
-	logrus.SetFormatter(&logrus.JSONFormatter{
+	logger = logrus.New()
+	file, err := os.OpenFile("app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err == nil {
+		logger.Out = file
+	} else {
+		logger.Info("Failed to log to file, using default stderr")
+	}
+	logger.SetFormatter(&logrus.JSONFormatter{
 		TimestampFormat:   "",
 		DisableTimestamp:  false,
 		DisableHTMLEscape: false,
@@ -40,17 +50,15 @@ func init() {
 		CallerPrettyfier:  nil,
 		PrettyPrint:       false,
 	})
-	logrus.Info("load config start")
 	viper.SetConfigName("app")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath("./conf")
-	err := viper.ReadInConfig()
+	err = viper.ReadInConfig()
 	if err != nil {
 		logrus.WithField("err", err.Error()).Error("load config failed")
 		panic(err)
 	}
 	apis = viper.GetStringSlice("apis")
-	logrus.Info("load config success")
 }
 
 func main() {
@@ -66,7 +74,7 @@ func main() {
 
 // accessAPI 访问API
 func accessAPI(url string) {
-	logWithUrl := logrus.WithField("url", url)
+	logWithUrl := logger.WithField("url", url)
 	//读取配置文件中的token
 	if err := readToken(token); err != nil {
 		logWithUrl.WithField("err", err.Error()).Error("read token failed")
