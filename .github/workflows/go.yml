@@ -30,7 +30,6 @@ jobs:
       run: |
         rm -rf app.log
         ./app
-        echo `date +"%Y-%m-%d %H:%M:%S"` > time.log
         cat app.log
     - name: Clear
       run: rm -rf app
