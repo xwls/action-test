@@ -9,6 +9,7 @@ on:
 env:
   KEY1: ${{ secrets.KEY1 }}
   KEY2: ${{ secrets.KEY2 }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
 
@@ -24,6 +25,18 @@ jobs:
     - name: Build
       run: go build -o app
     - name: Run
-      run: ./app
+      run: |
+        ./app
+        echo `date +"%Y-%m-%d %H:%M:%S"` begin > time.log
     - name: Clear
       run: rm -rf app
+    - name: Commit #上传新的refresh_token到仓库
+      run: |
+        git config --global user.email robot@githubaction.com
+        git config --global user.name robot
+        git add .
+        git commit -m "save time log" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
