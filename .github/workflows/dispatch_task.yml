@@ -17,7 +17,7 @@ jobs:
         python -V
         node -v
         npm -v
-        git -v
+        git version
         docker -v
 
     - name: Which
