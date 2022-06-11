@@ -10,10 +10,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v3
-      with:
-        go-version: 1.18
+    - name: Version
+      run: |
+        go version
+        java -version
+        python -V
+        node -v
+        npm -v
+        git -v
+        docker -v
 
-    - name: Build
-      run: go version
+    - name: Which
+      run: |
+        which go
+        which java
+        which python
+        which node
+        which npm
+        which git
+        which docker
