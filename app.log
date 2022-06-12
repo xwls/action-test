@@ -1,1 +1,2 @@
-{"body":"{\"@odata.context\":\"https://graph.microsoft.com/v1.0/$metadata#users('df61119f-38b4-44a6-848d-943780e...","level":"info","msg":"access success","time":"2022-06-12T18:30:26Z","url":"https://graph.microsoft.com/v1.0/me/contacts"}
+{"Expiry":"2022-06-12T20:11:14.725461129Z","level":"info","msg":"saved new token","time":"2022-06-12T19:00:29Z","url":"https://graph.microsoft.com/v1.0/me/contacts"}
+{"body":"{\"@odata.context\":\"https://graph.microsoft.com/v1.0/$metadata#users('df61119f-38b4-44a6-848d-943780e...","level":"info","msg":"access success","time":"2022-06-12T19:00:29Z","url":"https://graph.microsoft.com/v1.0/me/contacts"}
