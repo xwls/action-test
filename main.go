@@ -134,7 +134,7 @@ func accessAPI(url string) {
 		logWithUrl.WithField("err", err.Error()).Error("read body failed")
 		panic(err)
 	}
-	logWithUrl.WithField("body", string(bytes)[0:100]+"...").Info("access success")
+	logWithUrl.WithField("body", string(bytes)).Info("access success")
 }
 
 // readToken 从配置文件读取token
