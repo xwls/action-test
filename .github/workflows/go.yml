@@ -27,7 +27,7 @@ jobs:
         rm -rf app.log
         ./app
         cat app.log
-    - name: Clear
+    - name: Clean
       run: rm -rf app
     - name: Commit #上传新的refresh_token到仓库
       run: |
