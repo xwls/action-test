@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -81,25 +82,29 @@ func main() {
 	rand.Seed(time.Now().Unix())
 	//随机取一个url
 	url := apis[rand.Intn(len(apis))]
+	logWithUrl := logger.WithField("url", url)
 	//访问
-	accessAPI(url)
+	resp, err := accessAPI(url)
+	if err != nil {
+		logWithUrl.Errorln(err)
+		return
+	}
+	logWithUrl.Infoln(resp)
 }
 
 // accessAPI 访问API
-func accessAPI(url string) {
+func accessAPI(url string) (string, error) {
 	logWithUrl := logger.WithField("url", url)
 	//读取配置文件中的token
 	if err := readToken(token); err != nil {
-		logWithUrl.WithField("err", err.Error()).Error("read token failed")
-		panic(err)
+		return "", err
 	}
 	//校验token
 	ctx := context.Background()
 	tokenSource := msOauthConfig.TokenSource(ctx, token)
 	newToken, err := tokenSource.Token()
 	if err != nil {
-		logWithUrl.WithField("err", err.Error()).Error("check token failed")
-		panic(err)
+		return "", err
 	}
 
 	//检查token是否更新
@@ -108,8 +113,7 @@ func accessAPI(url string) {
 		//更新token
 		err := saveToken(token)
 		if err != nil {
-			logWithUrl.WithField("err", err.Error()).Error("save token failed")
-			panic(err)
+			return "", err
 		}
 		logWithUrl.WithField("Expiry", token.Expiry).Info("saved new token")
 	}
@@ -118,12 +122,11 @@ func accessAPI(url string) {
 	client := oauth2.NewClient(ctx, tokenSource)
 	res, err := client.Get(url)
 	if err != nil {
-		logWithUrl.WithField("err", err.Error()).Error("access api failed")
-		panic(err)
+		return "", err
 	}
 	if res.StatusCode != 200 {
 		logWithUrl.WithField("status_code", res.StatusCode).Error("response status not ok")
-		return
+		return "", errors.New("response status not ok")
 	}
 	body := res.Body
 	defer func(body io.ReadCloser) {
@@ -131,10 +134,9 @@ func accessAPI(url string) {
 	}(body)
 	bytes, err := ioutil.ReadAll(body)
 	if err != nil {
-		logWithUrl.WithField("err", err.Error()).Error("read body failed")
-		panic(err)
+		return "", err
 	}
-	logWithUrl.WithField("body", string(bytes)).Info("access success")
+	return string(bytes), nil
 }
 
 // readToken 从配置文件读取token
