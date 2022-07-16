@@ -1,2 +1,2 @@
-{"Expiry":"2022-07-16T00:47:49.791583684Z","level":"info","msg":"saved new token","time":"2022-07-15T23:37:50Z","url":"https://graph.microsoft.com/v1.0/me/contacts"}
-{"level":"info","msg":"{\"@odata.context\":\"https://graph.microsoft.com/v1.0/$metadata#users('df61119f-38b4-44a6-848d-943780e11d20')/contacts\",\"value\":[]}","time":"2022-07-15T23:37:51Z","url":"https://graph.microsoft.com/v1.0/me/contacts"}
+{"Expiry":"2022-07-16T02:25:58.990664431Z","level":"info","msg":"saved new token","time":"2022-07-16T01:05:43Z","url":"https://graph.microsoft.com/v1.0/me/contacts"}
+{"level":"info","msg":"{\"@odata.context\":\"https://graph.microsoft.com/v1.0/$metadata#users('df61119f-38b4-44a6-848d-943780e11d20')/contacts\",\"value\":[]}","time":"2022-07-16T01:05:43Z","url":"https://graph.microsoft.com/v1.0/me/contacts"}
