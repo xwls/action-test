@@ -1,1 +1,1 @@
-{"level":"info","msg":"{\"@odata.context\":\"https://graph.microsoft.com/v1.0/$metadata#users('df61119f-38b4-44a6-848d-943780e11d20')/messages\",\"value\":[]}","time":"2022-07-17T22:37:26Z","url":"https://graph.microsoft.com/v1.0/me/messages"}
+{"level":"info","msg":"{\"@odata.context\":\"https://graph.microsoft.com/v1.0/$metadata#users('df61119f-38b4-44a6-848d-943780e11d20')/contacts\",\"value\":[]}","time":"2022-07-17T23:10:50Z","url":"https://graph.microsoft.com/v1.0/me/contacts"}
